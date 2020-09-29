@@ -9,3 +9,7 @@
 .card img {
     width: 100%;
 }
+
+#form-delete-inline {
+    display: inline;
+}

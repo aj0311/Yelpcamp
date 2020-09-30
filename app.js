@@ -22,12 +22,28 @@ app.use(methodOverride("_method"));
 
 require('dotenv').config();
 
-const uri = process.env.MONGO_URL;
+const connectDB = async () => {
+    try {
+      await mongoose.connect(process.env.MONGO_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+      });
+      console.log("MONGODB: Default Connection Established");
+    } catch (error) {
+      console.log(error);
+      process.exit(1);
+    }   
+ }
+
+connectDB();
+
+/*const uri = process.env.MONGO_URL;
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
-});
+}); */
 
 app.use(require("express-session")({
     secret: "Favouritesss",
